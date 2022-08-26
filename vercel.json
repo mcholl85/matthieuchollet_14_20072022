@@ -1,7 +1,16 @@
 {
   "headers": [
     {
-      "source": "/service-worker.js",
+      "source": "/static/js/main.0b375ef2.js",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=0, must-revalidate"
+        }
+      ]
+    }, 
+    {
+      "source": "/static/css/main.13647d4a.css",
       "headers" : [
         {
           "key" : "Cache-Control",
