@@ -1,7 +1,7 @@
 import * as actions from '../../features/table'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectTable } from '../../utils/selectors'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { debounce } from 'lodash'
 
 export default function SearchTable() {
@@ -16,6 +16,10 @@ export default function SearchTable() {
     setInputSearchValue(value)
     debouncedDispatch(value)
   }
+
+  useEffect(() => {
+    setInputSearchValue(search)
+  }, [search])
 
   const debouncedDispatch = useCallback(
     debounce((value) => dispatch(actions.search({ search: value })), 500),
