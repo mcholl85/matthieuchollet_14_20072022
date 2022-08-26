@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import EmployeeList from './pages/EmployeeList'
+import CreateEmployee from './pages/CreateEmployee'
+import { EmployeeProvider } from './utils/context/employee'
+import { FormProvider } from './utils/context/form'
+import { FORM_DEFAULT_VALUES } from './utils/data'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <EmployeeProvider>
+        <FormProvider initialValues={FORM_DEFAULT_VALUES}>
+          <Routes>
+            <Route path='/' element={<CreateEmployee />} />
+            <Route path='/employee-list' element={<EmployeeList />} />
+          </Routes>
+        </FormProvider>
+      </EmployeeProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
