@@ -19,7 +19,7 @@ export default function SelectTable() {
       <label className=''>
         Show
         <select
-          className='appearance-none bg-gray-200 border-gray-200 text-gray-700 text-sm border rounded mx-3 mb-3 leading-tight focus:outline-none focus:bg-white'
+          className='appearance-none shadow-md bg-gray-200 border-gray-200 text-gray-700 text-sm border rounded mx-3 mb-3 leading-tight focus:outline-none focus:bg-white'
           value={entries}
           onChange={handleChange}
         >

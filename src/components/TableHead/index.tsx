@@ -34,7 +34,7 @@ export default function TableHead({ column }: TableHeadProps) {
   }
 
   return (
-    <th className='py-2 px-2 bg-gray-50'>
+    <th className='py-2 px-2'>
       <button value={column.data} onClick={handleClick}>
         <span className='flex items-center justify-center pointer-events-none'>
           {column.title}

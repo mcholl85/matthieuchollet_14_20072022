@@ -31,7 +31,7 @@ export default function SearchTable() {
       <label className='flex md:justify-end items-baseline'>
         Search :
         <input
-          className='appearance-none block bg-gray-200 border-gray-200
+          className='appearance-none block bg-gray-200 border-gray-200 shadow-md
              text-gray-700 border rounded mb-3 ml-3 leading-tight focus:outline-none focus:bg-white'
           type='text'
           value={inputSearchValue}

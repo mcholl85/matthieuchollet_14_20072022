@@ -21,7 +21,7 @@ export default function Pagination() {
   }
 
   return (
-    <div>
+    <div className='shadow-md'>
       <div
         className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px'
         aria-label='Pagination'
