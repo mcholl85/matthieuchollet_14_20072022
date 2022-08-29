@@ -25,7 +25,7 @@ export default function EmployeeList() {
   }, [])
 
   return (
-    <div className='container mx-auto py-4'>
+    <div className='container mx-auto py-4 sm:py-4 px-4 md:px-4'>
       <Header className='text-xl mb-6 uppercase font-bold text-center' title='Current Employees' />
       <div className='flex flex-wrap'>
         <div className='w-full md:w-1/2 text-gray-700 text-sm'>

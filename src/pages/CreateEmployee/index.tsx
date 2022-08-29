@@ -57,7 +57,7 @@ export default function CreateEmployee() {
 
   return (
     <>
-      <div className={'container mx-auto py-4'}>
+      <div className='container mx-auto py-4 sm:py-4 px-4 md:px-4'>
         <Header className='text-xl mb-6 uppercase font-bold text-center' title='HRnet' />
         <Link to='/employee-list'>
           <div className='w-full flex justify-center'>
