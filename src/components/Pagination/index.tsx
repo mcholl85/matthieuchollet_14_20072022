@@ -21,31 +21,15 @@ export default function Pagination() {
   }
 
   return (
-    <div className='shadow-md'>
-      <div
-        className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px'
-        aria-label='Pagination'
-      >
+    <div className='py-6'>
+      <div className='relative z-0 inline-flex rounded' aria-label='Pagination'>
         <button
-          className='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+          className='relative inline-flex items-center px-4 py-2 hover:bg-gray-900 hover:text-white rounded-md text-sm font-semibold text-gray-900 disabled:bg-white disabled:text-gray-900'
           value={currentPage - 1}
           onClick={handleClick}
           disabled={currentPage <= 1}
         >
-          <span className='sr-only'>Previous</span>
-          <svg
-            className='h-5 w-5 pointer-events-none'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 20 20'
-            fill='currentColor'
-            aria-hidden='true'
-          >
-            <path
-              fillRule='evenodd'
-              d='M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z'
-              clipRule='evenodd'
-            />
-          </svg>
+          Previous
         </button>
         {range.map((page, index) =>
           typeof page === 'number' ? (
@@ -55,15 +39,15 @@ export default function Pagination() {
               onClick={handleClick}
               aria-current='page'
               className={`z-10 ${
-                currentPage === page ? 'bg-gray-200 text-gray-700' : 'bg-white text-gray-500'
-              }  border-gray-300  relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
+                currentPage === page ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+              } relative inline-flex rounded-md items-center mx-1 px-4 py-2 text-sm font-bold hover:bg-gray-900 hover:text-white`}
             >
               {page}
             </button>
           ) : (
             <span
               key={index}
-              className='relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700'
+              className='relative inline-flex items-center mx-1 px-4 py-2 bg-white text-sm font-bold text-gray-900'
             >
               {page}
             </span>
@@ -71,25 +55,12 @@ export default function Pagination() {
         )}
 
         <button
-          className='relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+          className='relative inline-flex items-center px-4 py-2 hover:bg-gray-900 hover:text-white rounded-md bg-white text-sm font-semibold text-gray-900 hover:bg-gray-50 disabled:bg-white disabled:text-gray-900'
           value={currentPage + 1}
           onClick={handleClick}
           disabled={currentPage >= totalPage}
         >
-          <span className='sr-only'>Next</span>
-          <svg
-            className='h-5 w-5 pointer-events-none'
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 20 20'
-            fill='currentColor'
-            aria-hidden='true'
-          >
-            <path
-              fillRule='evenodd'
-              d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z'
-              clipRule='evenodd'
-            />
-          </svg>
+          Next
         </button>
       </div>
     </div>

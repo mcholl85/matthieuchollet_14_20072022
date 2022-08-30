@@ -34,23 +34,19 @@ export default function TableHead({ column }: TableHeadProps) {
   }
 
   return (
-    <th className='py-2 px-2'>
+    <th className='px-3 py-4 text-center'>
       <button value={column.data} onClick={handleClick}>
-        <span className='flex items-center justify-center pointer-events-none'>
+        <span className='flex items-center text-sm uppercase font-bolder text-white whitespace-nowrap text-left justify-start pointer-events-none'>
           {column.title}
           <div className='ml-1'>
-            <Chevron
-              direction='up'
-              className={`h-4 w-4 ${
-                sort === column.data && order === 'asc' ? 'opacity-100' : 'opacity-25'
-              }`}
-            />
-            <Chevron
-              direction='down'
-              className={`h-4 w-4 -mt-2 ${
-                sort === column.data && order === 'desc' ? 'opacity-100' : 'opacity-25'
-              }`}
-            />
+            {sort === column.data ? (
+              <Chevron
+                direction={order === 'asc' ? 'down' : 'up'}
+                className='h-5 w-5 opacity-100'
+              />
+            ) : (
+              <Chevron direction='down' className='h-5 w-5 opacity-25' />
+            )}
           </div>
         </span>
       </button>

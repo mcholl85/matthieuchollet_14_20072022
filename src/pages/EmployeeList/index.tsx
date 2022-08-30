@@ -25,30 +25,34 @@ export default function EmployeeList() {
   }, [])
 
   return (
-    <div className='container mx-auto py-4 sm:py-4 px-4 md:px-4'>
-      <Header className='text-xl mb-6 uppercase font-bold text-center' title='Current Employees' />
-      <div className='flex flex-wrap'>
-        <div className='w-full md:w-1/2 text-gray-700 text-sm'>
-          <SelectTable />
-        </div>
-        <div className='w-full md:w-1/2 text-gray-700 text-sm'>
-          <SearchTable />
-        </div>
-      </div>
-      <Table columns={COLUMNS_TABLE} />
-      <div className='bg-white py-3 flex items-center justify-between'>
-        <div className='sm:flex-1 sm:flex sm:items-center sm:justify-between'>
+    <div className='antialiased bg-gray-100 font-sans min-h-screen'>
+      <div className='container mx-auto py-4 sm:py-8 px-4 md:px-0'>
+        <div className='px-6 pt-8 bg-white rounded-lg'>
+          <Header className='mb-6 text-2xl font-semibold leading-tight' title='Current Employees' />
+          <div className='my-2 flex justify-between'>
+            <div className='flex flex-col sm:flex-row items-start'>
+              <SelectTable />
+              <SearchTable />
+            </div>
+            <div>
+              <Link to='/'>
+                <Button
+                  title='Add Employee'
+                  className='text-sm bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-900 rounded-md duration-200 ease-out hover:scale-105'
+                />
+              </Link>
+            </div>
+          </div>
           <ShowResults />
-          <Pagination />
+
+          <div className='pt-4 overflow-x-auto'>
+            <div className='inline-block bg-white min-w-full rounded-lg overflow-hidden'>
+              <Table columns={COLUMNS_TABLE} />
+              <Pagination />
+            </div>
+          </div>
         </div>
       </div>
-
-      <Link to='/'>
-        <Button
-          title='Home'
-          className='bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 mb-6 border border-gray-400 rounded shadow'
-        />
-      </Link>
     </div>
   )
 }

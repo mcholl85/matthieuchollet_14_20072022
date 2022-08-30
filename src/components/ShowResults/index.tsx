@@ -11,14 +11,14 @@ export default function ShowResults() {
   const last = entries * page > totalCount ? totalCount : entries * page
 
   return (
-    <div className='my-2'>
-      <p className='text-sm text-gray-700'>
+    <div className='pt-2'>
+      <p className='text-sm text-gray-900'>
         Showing
-        <span className='font-medium mx-1'>{first}</span>
+        <span className='font-semibold mx-1'>{first}</span>
         to
-        <span className='font-medium mx-1'>{last}</span>
+        <span className='font-semibold mx-1'>{last}</span>
         of
-        <span className='font-medium mx-1'>{totalCount}</span>
+        <span className='font-semibold mx-1'>{totalCount}</span>
         results
       </p>
     </div>
