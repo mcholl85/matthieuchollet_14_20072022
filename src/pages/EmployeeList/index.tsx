@@ -26,7 +26,7 @@ export default function EmployeeList() {
 
   return (
     <div className='antialiased bg-gray-100 font-sans min-h-screen'>
-      <div className='container mx-auto pt-2 px-4 md:px-0'>
+      <div className='container mx-auto pt-2 pb-8 px-4 md:px-0'>
         <Header className='text-3xl my-6 uppercase font-bold text-center' title='HRnet' />
         <div className='px-6 pt-8 bg-white rounded-lg'>
           <Header className='mb-6 text-2xl font-semibold leading-tight' title='Current Employees' />
