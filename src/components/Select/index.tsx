@@ -22,7 +22,7 @@ export default function Select({ options, label, id, errors, clickEvent }: Optio
   return (
     <div className='w-full px-3'>
       <label
-        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+        className='block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2'
         htmlFor='department'
       >
         {label}
@@ -33,7 +33,7 @@ export default function Select({ options, label, id, errors, clickEvent }: Optio
           onClick={() => setIsOpen(!isOpen)}
           className={`appearance-none text-left block w-full bg-gray-200 border ${
             errors[id] ? 'border-red-500' : 'border-gray-200'
-          } rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500`}
+          } rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900`}
           aria-haspopup='listbox'
           aria-expanded='true'
           aria-labelledby='listbox-label'
@@ -55,7 +55,7 @@ export default function Select({ options, label, id, errors, clickEvent }: Optio
             {options.map((option) => (
               <li
                 key={option.id}
-                className='text-gray-900 cursor-default select-none relative py-2 pl-3 hover:bg-indigo-500 hover:text-white'
+                className='text-gray-900 cursor-default select-none relative py-2 pl-3 hover:bg-gray-900 hover:text-white'
                 id={id}
                 role='option'
                 value={option.id}

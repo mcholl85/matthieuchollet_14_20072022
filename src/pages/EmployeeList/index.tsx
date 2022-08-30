@@ -26,7 +26,8 @@ export default function EmployeeList() {
 
   return (
     <div className='antialiased bg-gray-100 font-sans min-h-screen'>
-      <div className='container mx-auto py-4 sm:py-8 px-4 md:px-0'>
+      <div className='container mx-auto pt-2 px-4 md:px-0'>
+        <Header className='text-3xl my-6 uppercase font-bold text-center' title='HRnet' />
         <div className='px-6 pt-8 bg-white rounded-lg'>
           <Header className='mb-6 text-2xl font-semibold leading-tight' title='Current Employees' />
           <div className='my-2 flex justify-between'>
@@ -46,7 +47,7 @@ export default function EmployeeList() {
           <ShowResults />
 
           <div className='pt-4 overflow-x-auto'>
-            <div className='inline-block bg-white min-w-full rounded-lg overflow-hidden'>
+            <div className='inline-block bg-white min-w-full rounded-md overflow-hidden'>
               <Table columns={COLUMNS_TABLE} />
               <Pagination />
             </div>
