@@ -60,8 +60,8 @@ export default function CreateEmployee() {
       <div className='container mx-auto pt-2 pb-8 px-4 md:px-4'>
         <Header className='text-3xl my-6 uppercase font-bold text-center' title='HRnet' />
         <div className='px-6 py-8 bg-white rounded-lg'>
-          <div className='flex flex-row items-baseline   justify-between'>
-            <h2 className='text-xl mb-6 uppercase font-bold'>Create Employee</h2>
+          <div className='flex flex-row items-baseline justify-between'>
+            <h2 className='text-2xl mb-6 font-semibold leading-tight'>Create Employee</h2>
             <Link to='/employee-list'>
               <div className='w-full flex justify-center'>
                 <Button

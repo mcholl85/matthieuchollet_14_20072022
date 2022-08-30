@@ -30,8 +30,8 @@ export default function EmployeeList() {
         <Header className='text-3xl my-6 uppercase font-bold text-center' title='HRnet' />
         <div className='px-6 pt-8 bg-white rounded-lg'>
           <Header className='mb-6 text-2xl font-semibold leading-tight' title='Current Employees' />
-          <div className='my-2 flex justify-between'>
-            <div className='flex flex-col sm:flex-row items-start'>
+          <div className='my-2 flex flex-col flex-col-reverse sm:flex-row justify-between'>
+            <div className='flex flex-row flex-1 justify-between sm:justify-start'>
               <SelectTable />
               <SearchTable />
             </div>
@@ -39,7 +39,7 @@ export default function EmployeeList() {
               <Link to='/'>
                 <Button
                   title='Add Employee'
-                  className='text-sm bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-900 rounded-md duration-200 ease-out hover:scale-105'
+                  className='text-sm w-full sm:w-auto mb-5 sm:mb-0 bg-gray-900 text-white font-semibold py-2 px-4 border border-gray-900 rounded-md duration-200 ease-out hover:scale-105'
                 />
               </Link>
             </div>
