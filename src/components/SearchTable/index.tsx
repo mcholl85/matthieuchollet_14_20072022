@@ -35,7 +35,7 @@ export default function SearchTable() {
       </span>
       <input
         placeholder='Search'
-        className='appearance-none rounded-md border border-grey-900 border-b block pl-8 pr-6 py-2 w-full bg-gray-900 text-sm font-semibold placeholder-gray-600 text-gray-700 focus:placeholder-white focus:text-white focus:font-semibold focus:border-gray-900 focus:ring-0'
+        className='appearance-none rounded-md border border-grey-900 border-b block pl-8 pr-6 py-2 w-full bg-gray-900 text-sm font-semibold placeholder-gray-500 focus:placeholder-white focus:text-white focus:font-semibold focus:border-gray-900 focus:ring-0'
         type='text'
         value={inputSearchValue}
         onChange={handleChange}
