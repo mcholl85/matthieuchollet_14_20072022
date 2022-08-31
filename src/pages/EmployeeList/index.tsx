@@ -47,11 +47,11 @@ export default function EmployeeList() {
           <ShowResults />
 
           <div className='pt-4 overflow-x-auto'>
-            <div className='inline-block bg-white min-w-full rounded-md overflow-hidden'>
+            <div className='inline-block bg-white min-w-full rounded-lg overflow-hidden'>
               <Table columns={COLUMNS_TABLE} />
-              <Pagination />
             </div>
           </div>
+          <Pagination />
         </div>
       </div>
     </div>

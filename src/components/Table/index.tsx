@@ -13,7 +13,7 @@ export default function Table({ columns }: PropsTable) {
   return (
     <table className='min-w-full leading-normal'>
       <thead>
-        <tr className='border-b-2 border-grey-200 bg-gray-900'>
+        <tr className='bg-gradient-to-t from-gray-900 to-gray-700'>
           {columns.map((column, key) => (
             <TableHead key={key} column={column} />
           ))}
