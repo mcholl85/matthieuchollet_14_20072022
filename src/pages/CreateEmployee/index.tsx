@@ -8,7 +8,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
 import { getErrorsFromSubmit, getErrorFromChange, objectIsEmpty } from '../../utils/form'
-import Modal from '../../components/Modal'
+import { Modal } from 'react-tailwind-modal'
 
 export default function CreateEmployee() {
   const { form, setForm, errors, setErrors, setNewForm } = useContext(FormContext)
