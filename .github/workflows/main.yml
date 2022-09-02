@@ -30,7 +30,7 @@ jobs:
       - name: Deploy
         run: |
           npm install -g serve
-          serve -s build&
+          serve -s build -l 46311&
           ls
       - uses: actions/checkout@v2
       - name: Run Lighthouse against a static dist dir
