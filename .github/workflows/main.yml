@@ -27,6 +27,9 @@ jobs:
         run: npm run format
       - name: Build
         run: npm run build
+      - name: Deploy
+        run: npm install -g serve
+        run: serve -s build
       - uses: actions/checkout@v2
       - name: Run Lighthouse against a static dist dir
         uses: treosh/lighthouse-ci-action@v9
