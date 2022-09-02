@@ -10,7 +10,3 @@ jobs:
         with:
           # no urls needed, since it uses local folder to scan .html files
           configPath: './lighthouserc.json'
-      - uses: manrueda/lighthouse-report-action@v1.0.1
-          with:
-            reports: '.lighthouseci'
-            github-token: ${{ secrets.GH_TOKEN }}
