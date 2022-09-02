@@ -25,3 +25,13 @@ jobs:
         run: npm run lint:fix
       - name: Prettier
         run: npm run format
+      - name: Build
+        run: npm run build
+      - name: Run Lighthouse against a static dist dir
+        uses: treosh/lighthouse-ci-action@v9
+        # no urls needed, since it uses local folder to scan .html files
+          configPath: './lighthouserc.json'
+        uses: manrueda/lighthouse-report-action@v1.0.1
+        with:
+          reports: '.lighthouseci'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
