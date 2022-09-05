@@ -25,9 +25,3 @@ jobs:
         run: npm run lint:fix
       - name: Prettier
         run: npm run format
-      - name: Build
-        run: npm run build
-      - name: Install
-        run: npm ci && npm i -g http-server @lhci/cli
-      - name: LighthouseCI
-        run: lhci autorun
