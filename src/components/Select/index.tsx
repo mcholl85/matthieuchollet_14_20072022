@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import SelectIcon from '../SelectIcon'
 import CheckIcon from '../CheckIcon'
+import { FormContext } from '../../utils/context/form'
+import { getErrorFromChange, objectIsEmpty } from '../../utils/form'
+import { VALIDATIONS } from '../../utils/data'
 
 interface Options {
   options: {
@@ -9,15 +12,29 @@ interface Options {
   }[]
   label: string
   id: string
-  errors: {
-    [key: string]: string
-  }
-  clickEvent: (key: string, value: string) => void
 }
 
-export default function Select({ options, label, id, errors, clickEvent }: Options) {
+export default function Select({ options, label, id }: Options) {
+  const { form, setForm, errors, setErrors } = useContext(FormContext)
   const [selected, setSelected] = useState({ id: -1, value: `Select a ${label}` })
   const [isOpen, setIsOpen] = useState(false)
+
+  const clickEvent = (option: { id: number; value: string }) => {
+    const { value } = option
+    const copyErrors = { ...errors }
+    const newError = getErrorFromChange(id, value, VALIDATIONS)
+
+    if (objectIsEmpty(newError)) {
+      delete copyErrors[id]
+      setErrors(copyErrors)
+    } else {
+      setErrors({ ...copyErrors, [id]: newError[id] })
+    }
+
+    setForm({ ...form, [id]: value })
+    setSelected(option)
+    setIsOpen(!isOpen)
+  }
 
   return (
     <div className='w-full px-3'>
@@ -59,11 +76,7 @@ export default function Select({ options, label, id, errors, clickEvent }: Optio
                 id={id}
                 role='option'
                 value={option.id}
-                onClick={() => {
-                  setSelected(option)
-                  setIsOpen(!isOpen)
-                  clickEvent(id, option.value)
-                }}
+                onClick={() => clickEvent(option)}
               >
                 <div className='flex items-center pointer-events-none'>
                   <span className='font-normal ml-3 block truncate'>{option.value}</span>

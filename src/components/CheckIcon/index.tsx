@@ -6,6 +6,7 @@ export default function CheckIcon() {
       viewBox='0 0 20 20'
       fill='currentColor'
       aria-hidden='true'
+      data-testid='checkIcon'
     >
       <path
         fillRule='evenodd'

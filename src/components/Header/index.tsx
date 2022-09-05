@@ -1,6 +1,5 @@
-interface HeaderProps {
+interface HeaderProps extends React.HTMLAttributes<HTMLHeadingElement> {
   title: string
-  className: string
 }
 
 export default function Header({ title, className }: HeaderProps) {

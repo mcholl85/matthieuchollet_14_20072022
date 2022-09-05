@@ -7,11 +7,11 @@ import Select from '../../components/Select'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
-import { getErrorsFromSubmit, getErrorFromChange, objectIsEmpty } from '../../utils/form'
+import { getErrorsFromSubmit, objectIsEmpty } from '../../utils/form'
 import { Modal } from 'react-tailwind-modal'
 
 export default function CreateEmployee() {
-  const { form, setForm, errors, setErrors, setNewForm } = useContext(FormContext)
+  const { form, setErrors, setNewForm } = useContext(FormContext)
   const { saveEmployees } = useContext(EmployeeContext)
   const [formIsValid, setFormIsValid] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -29,19 +29,6 @@ export default function CreateEmployee() {
       setNewForm()
     }
   }, [formIsValid])
-
-  const handleFormChange = (key: string, value: string): void => {
-    const copyErrors = { ...errors }
-    const newError = getErrorFromChange(key, value, VALIDATIONS)
-
-    if (objectIsEmpty(newError)) {
-      delete copyErrors[key]
-      setErrors(copyErrors)
-    } else {
-      setErrors({ ...copyErrors, [key]: newError[key] })
-    }
-    setForm({ ...form, [key]: value })
-  }
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
@@ -74,36 +61,21 @@ export default function CreateEmployee() {
           <form id='create-employee' className='w-full' onSubmit={handleSubmit}>
             <div className='flex flex-wrap -mx-3 mb-6'>
               <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-                <Input
-                  label='First Name'
-                  type='text'
-                  id='firstName'
-                  changeEvent={handleFormChange}
-                />
+                <Input label='First Name' type='text' id='firstName' />
               </div>
               <div className='w-full md:w-1/2 px-3'>
-                <Input label='Last Name' type='text' id='lastName' changeEvent={handleFormChange} />
+                <Input label='Last Name' type='text' id='lastName' />
               </div>
             </div>
             <div className='flex flex-wrap -mx-3 mb-6'>
               <div className='w-full px-3'>
-                <Input
-                  label='Date of birth'
-                  type='date'
-                  id='dateOfBirth'
-                  changeEvent={handleFormChange}
-                />
+                <Input label='Date of birth' type='date' id='dateOfBirth' />
               </div>
             </div>
 
             <div className='flex flex-wrap -mx-3 mb-6'>
               <div className='w-full px-3'>
-                <Input
-                  label='Start Date'
-                  type='date'
-                  id='startDate'
-                  changeEvent={handleFormChange}
-                />
+                <Input label='Start Date' type='date' id='startDate' />
               </div>
             </div>
 
@@ -114,42 +86,25 @@ export default function CreateEmployee() {
                 </legend>
                 <div className='flex flex-wrap -mx-3 mb-6'>
                   <div className='w-full px-3'>
-                    <Input label='Street' type='text' id='street' changeEvent={handleFormChange} />
+                    <Input label='Street' type='text' id='street' />
                   </div>
                 </div>
                 <div className='flex flex-wrap -mx-3 mb-2'>
                   <div className='w-full md:w-1/3 px-3 mb-6 md:mb-0'>
-                    <Input label='City' type='text' id='city' changeEvent={handleFormChange} />
+                    <Input label='City' type='text' id='city' />
                   </div>
                   <div className='w-full md:w-1/3 mb-6 md:mb-0'>
-                    <Select
-                      options={STATES_OPTIONS}
-                      label='State'
-                      id='state'
-                      errors={errors}
-                      clickEvent={handleFormChange}
-                    />
+                    <Select options={STATES_OPTIONS} label='State' id='state' />
                   </div>
                   <div className='w-full md:w-1/3 px-3 mb-0'>
-                    <Input
-                      label='Zip Code'
-                      type='number'
-                      id='zipCode'
-                      changeEvent={handleFormChange}
-                    />
+                    <Input label='Zip Code' type='number' id='zipCode' />
                   </div>
                 </div>
               </div>
             </fieldset>
 
             <div className='flex flex-wrap -mx-3 mb-6'>
-              <Select
-                options={DEPARTMENT_OPTIONS}
-                id='department'
-                label='Department'
-                errors={errors}
-                clickEvent={handleFormChange}
-              />
+              <Select options={DEPARTMENT_OPTIONS} id='department' label='Department' />
             </div>
             <Button
               type='submit'
