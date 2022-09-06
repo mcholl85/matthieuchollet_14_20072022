@@ -40,7 +40,7 @@ export const getRangeOfPages = (currentPage: number, lastPage: number, delta: nu
   if (currentPage - delta > 2) range.unshift('...')
   if (currentPage + delta < lastPage - 1) range.push('...')
   range.unshift(1)
-  if (lastPage !== 1) range.push(lastPage)
+  if (lastPage > 1) range.push(lastPage)
 
   return range
 }

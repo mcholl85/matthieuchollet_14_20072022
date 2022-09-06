@@ -43,7 +43,11 @@ export default function Input({ label, type, id }: InputProps) {
           errors[id] ? 'border-red-500' : 'border-gray-200'
         } text-gray-900 border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-900 focus:border-2 focus:ring-0`}
       />
-      {errors[id] && <p className='text-red-500 text-xs italic'>{errors[id]}</p>}
+      {errors[id] && (
+        <p className='text-red-500 text-xs italic' data-testid={`error-${id}`}>
+          {errors[id]}
+        </p>
+      )}
     </>
   )
 }

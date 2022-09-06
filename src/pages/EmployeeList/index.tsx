@@ -30,7 +30,7 @@ export default function EmployeeList() {
         <Header className='text-3xl my-6 uppercase font-bold text-center' title='HRnet' />
         <div className='px-6 pt-8 bg-white rounded-lg'>
           <Header className='mb-6 text-2xl font-semibold leading-tight' title='Current Employees' />
-          <div className='my-2 flex flex-col flex-col-reverse sm:flex-row justify-between'>
+          <div className='my-2 flex flex-col sm:flex-row justify-between'>
             <div className='flex flex-row flex-1 justify-between sm:justify-start'>
               <SelectTable />
               <SearchTable />

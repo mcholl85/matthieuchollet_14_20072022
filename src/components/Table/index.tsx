@@ -44,7 +44,10 @@ export default function Table({ columns }: PropsTable) {
           ))
         ) : (
           <tr>
-            <td colSpan={columns.length} className='py-6 px-5 text-lg text-gray-900'>
+            <td
+              colSpan={columns.length}
+              className='py-6 px-5 text-xl text-center font-bold text-gray-900'
+            >
               No matching records found
             </td>
           </tr>
