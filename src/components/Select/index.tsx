@@ -37,7 +37,7 @@ export default function Select({ options, label, id }: Options) {
   }
 
   return (
-    <div className='w-full px-3'>
+    <div className='w-full px-3' data-testid='select'>
       <label
         className='block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2'
         htmlFor='department'
@@ -76,14 +76,18 @@ export default function Select({ options, label, id }: Options) {
                 id={id}
                 role='option'
                 value={option.id}
+                aria-selected={option.value === selected.value}
                 onClick={() => clickEvent(option)}
               >
                 <div className='flex items-center pointer-events-none'>
                   <span className='font-normal ml-3 block truncate'>{option.value}</span>
                 </div>
-                <span className='absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none'>
-                  {option.value === selected.value && <CheckIcon />}
-                </span>
+
+                {option.value === selected.value && (
+                  <span className='absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none'>
+                    <CheckIcon />
+                  </span>
+                )}
               </li>
             ))}
           </ul>

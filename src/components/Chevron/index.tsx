@@ -1,6 +1,5 @@
-interface ChevronProps {
+interface ChevronProps extends React.HTMLAttributes<HTMLOrSVGElement> {
   direction: 'up' | 'down'
-  className?: string
 }
 
 export default function Chevron({ direction, className }: ChevronProps) {

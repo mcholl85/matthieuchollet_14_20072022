@@ -11,7 +11,7 @@ export default function ShowResults() {
   const last = entries * page > totalCount ? totalCount : entries * page
 
   return (
-    <div className='pt-2'>
+    <div className='pt-2' data-testid='showResults'>
       <p className='text-sm text-gray-900'>
         Showing
         <span className='font-semibold mx-1'>{first}</span>

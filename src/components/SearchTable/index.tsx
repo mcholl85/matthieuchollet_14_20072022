@@ -37,6 +37,7 @@ export default function SearchTable() {
         placeholder='Search'
         className='appearance-none rounded-md border border-b block pl-8 pr-6 py-2 w-full bg-gray-900 text-sm font-semibold placeholder-gray-500 focus:placeholder-white focus:text-white focus:font-semibold focus:border-gray-900 focus:ring-0'
         type='text'
+        data-testid='search'
         value={inputSearchValue}
         onChange={handleChange}
       />

@@ -20,6 +20,7 @@ export default function SelectTable() {
         className='appearance-none h-full rounded-md border block w-full bg-gray-900 border-gray-900 text-white font-semibold py-2 px-4 pr-8 leading-tight focus:border-gray-400 focus:ring-0'
         value={entries}
         onChange={handleChange}
+        data-testid='selectTable'
       >
         {ENTRIES_OPTIONS.map((option) => (
           <option key={option.id} value={option.value}>

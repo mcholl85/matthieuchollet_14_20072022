@@ -6,6 +6,7 @@ import { selectTable } from '../../utils/selectors'
 type Column = {
   data: string
   title: string
+  type: string
 }
 
 type TableHeadProps = {
@@ -34,8 +35,8 @@ export default function TableHead({ column }: TableHeadProps) {
   }
 
   return (
-    <th className='px-3 py-4 text-center'>
-      <button value={column.data} onClick={handleClick}>
+    <th className='px-3 py-4 text-center' data-testid='tableHead'>
+      <button value={column.data} onClick={handleClick} data-testid='sortAndOrderButton'>
         <span className='flex items-center text-sm uppercase font-bolder text-white whitespace-nowrap text-left justify-start pointer-events-none'>
           {column.title}
           <div className='ml-1'>

@@ -4,14 +4,14 @@ import { selectTable } from '../../utils/selectors'
 import TableHead from '../TableHead'
 
 interface PropsTable {
-  columns: { title: string; data: string }[]
+  columns: { title: string; data: string; type: string }[]
 }
 
 export default function Table({ columns }: PropsTable) {
   const { filteredEmployees: data } = useSelector(selectTable)
 
   return (
-    <table className='min-w-full leading-normal'>
+    <table className='min-w-full leading-normal' data-testid='table'>
       <thead>
         <tr className='bg-gradient-to-t from-gray-900 to-gray-700'>
           {columns.map((column, key) => (
@@ -25,6 +25,7 @@ export default function Table({ columns }: PropsTable) {
             <tr
               className='bg-white text-sm border-b border-gray-200 hover:bg-gray-200'
               key={'employee' + key}
+              data-testid='employee'
             >
               {Object.entries(employee).map(([key, value], index) => (
                 <td

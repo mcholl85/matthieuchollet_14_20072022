@@ -12,7 +12,6 @@ export default function Pagination() {
 
   const delta = 1
   const range = getRangeOfPages(page, totalPage, delta)
-  console.log(page, totalPage)
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const value = (e.target as HTMLButtonElement).value
