@@ -14,7 +14,7 @@ export default function CreateEmployee() {
   const { form, setErrors, setNewForm } = useContext(FormContext)
   const { saveEmployees } = useContext(EmployeeContext)
   const [formIsValid, setFormIsValid] = useState(false)
-  const [modalIsOpen, setModalIsOpen] = useState(true)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
     if (formIsValid) {
