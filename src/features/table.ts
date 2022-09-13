@@ -60,8 +60,10 @@ const { actions, reducer } = createSlice({
       }
 
       if (search) {
-        search = initialState.params.search
+        search = action.payload.params.search
         draft.filteredEmployees = getFilteredEmployeesBySearch(search, draft.employees)
+      } else {
+        search = initialState.params.search
       }
       draft.filteredEmployees = filteredEmployeesBySortAndOrder(draft.filteredEmployees, sort, order)
 
