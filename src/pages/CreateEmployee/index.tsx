@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormContext } from '../../utils/context/form'
 import { EmployeeContext } from '../../utils/context/employee'
 import { Link } from 'react-router-dom'
@@ -13,11 +13,13 @@ import { Modal } from 'react-tailwind-modal'
 export default function CreateEmployee() {
   const { form, setErrors, setNewForm } = useContext(FormContext)
   const { saveEmployees } = useContext(EmployeeContext)
-  const [formIsValid, setFormIsValid] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
-  useEffect(() => {
-    if (formIsValid) {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    const newErrors = getErrorsFromSubmit(form, VALIDATIONS)
+
+    if (objectIsEmpty(newErrors)) {
       saveEmployees({
         ...form,
         ...{
@@ -27,17 +29,7 @@ export default function CreateEmployee() {
       })
       setModalIsOpen(true)
       setNewForm()
-    }
-  }, [formIsValid])
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
-    const newErrors = getErrorsFromSubmit(form, VALIDATIONS)
-
-    if (objectIsEmpty(newErrors)) {
-      setFormIsValid(true)
     } else {
-      setFormIsValid(false)
       setErrors(newErrors)
     }
   }
