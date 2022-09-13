@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { getColumnByData } from '../../utils/form'
 import { selectTable } from '../../utils/selectors'
+import { filteredEmployeesByEntriesAndPage } from '../../utils/table'
 import TableHead from '../TableHead'
 
 interface PropsTable {
@@ -8,7 +9,12 @@ interface PropsTable {
 }
 
 export default function Table({ columns }: PropsTable) {
-  const { filteredEmployees: data } = useSelector(selectTable)
+  const {
+    filteredEmployees,
+    params: { entries, page },
+  } = useSelector(selectTable)
+
+  const data = filteredEmployeesByEntriesAndPage(filteredEmployees, entries, page)
 
   return (
     <table className='min-w-full leading-normal' data-testid='table'>

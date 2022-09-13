@@ -1,7 +1,7 @@
 import { EmployeeState } from '../../utils/context/employee'
 import * as reactRedux from 'react-redux'
 
-export const USE_MOCK_DATA = false
+export const USE_MOCK_DATA = true
 
 export const mockStore = {
     table: {
