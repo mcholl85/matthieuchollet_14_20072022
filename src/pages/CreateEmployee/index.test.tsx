@@ -1,5 +1,5 @@
 import CreateEmployee from '.'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { FormProvider } from '../../utils/context/form'
 import { EmployeeProvider } from '../../utils/context/employee'
 import { FORM_DEFAULT_VALUES } from '../../utils/data'
