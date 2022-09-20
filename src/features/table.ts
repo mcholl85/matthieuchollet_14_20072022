@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { EmployeeState } from '../utils/context/employee';
 import { entriesOptionsIsValid, orderOptionsIsValid, sortOptionsIsValid, updateURL } from '../utils/employeeList'
-import { filteredEmployeesByEntriesAndPage, filteredEmployeesBySortAndOrder, getFilteredEmployeesBySearch } from '../utils/table';
+import { filteredEmployeesBySortAndOrder, getFilteredEmployeesBySearch } from '../utils/table';
 
 export interface ParamsState {
   entries?: number,
@@ -15,7 +15,6 @@ interface StateTable {
   employees: EmployeeState[],
   filteredEmployees?: EmployeeState[],
   params: ParamsState,
-  count?: number,
   totalCount?: number,
   totalPage?: number,
 }
@@ -31,7 +30,6 @@ const initialState = {
   employees: [] as EmployeeState[],
   filteredEmployees: [] as EmployeeState[],
   params: { entries: 10, page: 1, search: '', sort: 'firstName', order: 'asc' },
-  count: 0,
   totalCount: 0,
   totalPage: 0
 }
@@ -41,152 +39,107 @@ const { actions, reducer } = createSlice({
   initialState,
   reducers: {
     loadTable: (draft: StateTable, action: PayloadAction<ActionLoad>) => {
-      const employees = action.payload.employees
       const params = action.payload.params
-      let filteredEmployees = [... employees] 
       let { sort, search, order } = params
       let entries = parseInt(params.entries)
       let page = parseInt(params.page)
 
+      draft.employees = [...action.payload.employees]
+      draft.filteredEmployees = [...action.payload.employees]
+
       if(!sortOptionsIsValid(sort)){ 
         sort = initialState.params.sort
       }
+
       if(!order || !orderOptionsIsValid(order)) {
         order = initialState.params.order
       }
+
       if(!entries || !entriesOptionsIsValid(entries)) {
         entries = initialState.params.entries
       }
-      if (!search) {
-        search = initialState.params.search
-        filteredEmployees = [...employees]
+
+      if (search) {
+        search = action.payload.params.search
+        draft.filteredEmployees = getFilteredEmployeesBySearch(search, draft.employees)
       } else {
-        filteredEmployees = getFilteredEmployeesBySearch(search, employees)
+        search = initialState.params.search
       }
+      draft.filteredEmployees = filteredEmployeesBySortAndOrder(draft.filteredEmployees, sort, order)
 
-      const totalCount = filteredEmployees.length
-      const totalPage = totalCount === 0 ? 1 : Math.ceil(totalCount / entries)
+      draft.totalCount = draft.filteredEmployees.length
+      draft.totalPage = draft.totalCount === 0 ? 1 : Math.ceil(draft.totalCount / entries)
 
-      if (!page || !(page > 0 && page <= totalPage)) {
+      if (!page || !(page > 0 && page <= draft.totalPage)) {
         page = initialState.params.page  
       }
-      filteredEmployees = filteredEmployeesBySortAndOrder(filteredEmployees, sort, order)
-      filteredEmployees = filteredEmployeesByEntriesAndPage(filteredEmployees, entries, page)
-
-      draft.count = filteredEmployees.length
-      draft.totalCount = totalCount
-      draft.totalPage = totalPage
+      
       draft.params = { entries, sort, page, search, order }
-      draft.employees = employees
-      draft.filteredEmployees = filteredEmployees
       
       updateURL(draft.params)
 
       return 
     },
     setEntries: (draft, action: PayloadAction<ParamsState>) => {
-      let entries = action.payload.entries
-      let page = draft.params.page
-      let filteredEmployees = [...draft.employees]
-
-      if(!entries || !entriesOptionsIsValid(entries)) {
-        entries = initialState.params.entries
-      } 
-      
-      const totalPage = draft.totalCount === 0 ? 1 : Math.ceil(draft.totalCount/ entries)
-      
-      if (draft.params.search !== '') {
-        filteredEmployees = getFilteredEmployeesBySearch(draft.params.search, filteredEmployees)
+      if(!action.payload.entries || !entriesOptionsIsValid(action.payload.entries)) {
+        draft.params.entries = initialState.params.entries
+      } else {
+        draft.params.entries = action.payload.entries
       }
-      if (!(draft.params.page > 0 && draft.params.page <= totalPage)) {
-        page = initialState.params.page  
+
+      draft.totalPage = draft.totalCount === 0 ? 1 : Math.ceil(draft.totalCount/ draft.params.entries)
+
+      if (!(draft.params.page > 0 && draft.params.page <= draft.totalPage)) {
+        draft.params.page = initialState.params.page  
       }
-      filteredEmployees = filteredEmployeesBySortAndOrder(filteredEmployees, draft.params.sort, draft.params.order)
-      filteredEmployees = filteredEmployeesByEntriesAndPage(filteredEmployees, entries, page)
-
-      draft.count = filteredEmployees.length
-      draft.totalPage = totalPage
-      draft.params.entries = entries
-      draft.params.page = page
-      draft.filteredEmployees = filteredEmployees
-
+      
       updateURL({...draft.params})
       
       return
     },
     setSortAndOrder: (draft, action: PayloadAction<ParamsState>) => {
-      let { sort, order } = action.payload
-      let filteredEmployees = [...draft.employees]
-      const { entries } = draft.params
+      if(!action.payload.sort || !sortOptionsIsValid(action.payload.sort)){ 
+        draft.params.sort = initialState.params.sort
+      } else {
+        draft.params.sort = action.payload.sort
+      }
+      if(!action.payload.order || !orderOptionsIsValid(action.payload.order)) {
+        draft.params.order = initialState.params.order
+      } else {
+        draft.params.order = action.payload.order
+      }
 
-      if(!sort || !sortOptionsIsValid(sort)){ 
-        sort = initialState.params.sort
-      }
-      if(!order || !orderOptionsIsValid(order)) {
-        order = initialState.params.order
-      }
-      if (draft.params.search !== '') {
-        filteredEmployees = getFilteredEmployeesBySearch(draft.params.search, filteredEmployees)
-      }
-      filteredEmployees = filteredEmployeesBySortAndOrder(filteredEmployees, sort, order)
-      filteredEmployees = filteredEmployeesByEntriesAndPage(filteredEmployees, entries, draft.params.page)
-
-      draft.filteredEmployees = filteredEmployees
-      draft.params.sort = sort
-      draft.params.order = order
+      draft.filteredEmployees = filteredEmployeesBySortAndOrder(draft.filteredEmployees, draft.params.sort, draft.params.order)
 
       updateURL(draft.params)
 
       return
     },
     search: (draft, action: PayloadAction<ParamsState>) => {
-      let search = action.payload.search
-      let filteredEmployees = [...draft.employees]
-      let { page } = draft.params
-      const { sort, order, entries } = draft.params
-
-      if (!search) {
-        search = initialState.params.search
+      if (action.payload.search) {
+        draft.params.search = action.payload.search
+        draft.filteredEmployees = getFilteredEmployeesBySearch(draft.params.search, draft.employees)
+        draft.filteredEmployees = filteredEmployeesBySortAndOrder(draft.filteredEmployees, draft.params.sort, draft.params.order)
       } else {
-        filteredEmployees = getFilteredEmployeesBySearch(search, filteredEmployees)
+        draft.params.search = initialState.params.search
+        draft.filteredEmployees = draft.employees
       }
 
-      const totalCount = filteredEmployees.length
-      const totalPage = totalCount === 0 ? 1 : Math.ceil(totalCount / entries)
+      draft.totalCount = draft.filteredEmployees.length
+      draft.totalPage = draft.totalCount === 0 ? 1 : Math.ceil(draft.totalCount / draft.params.entries)
 
-      if (!(page > 0 && (page) <= totalPage)) {
-        page = initialState.params.page  
-      }
-      filteredEmployees = filteredEmployeesBySortAndOrder(filteredEmployees, sort, order)
-      filteredEmployees = filteredEmployeesByEntriesAndPage(filteredEmployees, entries, page)
-
-      draft.count = filteredEmployees.length
-      draft.totalCount = totalCount
-      draft.totalPage = totalPage
-      draft.params.search = search
-      draft.filteredEmployees = filteredEmployees
-      
-      updateURL({ entries, sort, page, search, order })
+      updateURL(draft.params)
 
       return
     },
     setPage: (draft, action: PayloadAction<ParamsState>) => {
       const page = action.payload.page
-      let filteredEmployees = [...draft.employees]
 
       if (!page || !(page > 0 && page <= draft.totalPage)) {
         return
       }
-      if (draft.params.search !== '') {
-        filteredEmployees = getFilteredEmployeesBySearch(draft.params.search, filteredEmployees)
-      }
-      filteredEmployees = filteredEmployeesBySortAndOrder(filteredEmployees, draft.params.sort, draft.params.order)
-      filteredEmployees = filteredEmployeesByEntriesAndPage(filteredEmployees, draft.params.entries, page)
 
-      draft.count = filteredEmployees.length
-      draft.filteredEmployees = filteredEmployees
       draft.params.page = page
-
       updateURL(draft.params)
 
       return

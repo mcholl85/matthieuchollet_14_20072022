@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import SelectIcon from '../SelectIcon'
 import CheckIcon from '../CheckIcon'
+import { FormContext } from '../../utils/context/form'
+import { getErrorFromChange, objectIsEmpty } from '../../utils/form'
+import { VALIDATIONS } from '../../utils/data'
 
 interface Options {
   options: {
@@ -9,20 +12,34 @@ interface Options {
   }[]
   label: string
   id: string
-  errors: {
-    [key: string]: string
-  }
-  clickEvent: (key: string, value: string) => void
 }
 
-export default function Select({ options, label, id, errors, clickEvent }: Options) {
+export default function Select({ options, label, id }: Options) {
+  const { form, setForm, errors, setErrors } = useContext(FormContext)
   const [selected, setSelected] = useState({ id: -1, value: `Select a ${label}` })
   const [isOpen, setIsOpen] = useState(false)
 
+  const clickEvent = (option: { id: number; value: string }) => {
+    const { value } = option
+    const copyErrors = { ...errors }
+    const newError = getErrorFromChange(id, value, VALIDATIONS)
+
+    if (objectIsEmpty(newError)) {
+      delete copyErrors[id]
+      setErrors(copyErrors)
+    } else {
+      setErrors({ ...copyErrors, [id]: newError[id] })
+    }
+
+    setForm({ ...form, [id]: value })
+    setSelected(option)
+    setIsOpen(!isOpen)
+  }
+
   return (
-    <div className='w-full px-3'>
+    <div className='w-full px-3' data-testid='select'>
       <label
-        className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'
+        className='block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2'
         htmlFor='department'
       >
         {label}
@@ -33,7 +50,7 @@ export default function Select({ options, label, id, errors, clickEvent }: Optio
           onClick={() => setIsOpen(!isOpen)}
           className={`appearance-none text-left block w-full bg-gray-200 border ${
             errors[id] ? 'border-red-500' : 'border-gray-200'
-          } rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500`}
+          } rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900`}
           aria-haspopup='listbox'
           aria-expanded='true'
           aria-labelledby='listbox-label'
@@ -55,22 +72,22 @@ export default function Select({ options, label, id, errors, clickEvent }: Optio
             {options.map((option) => (
               <li
                 key={option.id}
-                className='text-gray-900 cursor-default select-none relative py-2 pl-3 hover:bg-indigo-500 hover:text-white'
+                className='text-gray-900 cursor-default select-none relative py-2 pl-3 hover:bg-gray-900 hover:text-white'
                 id={id}
                 role='option'
                 value={option.id}
-                onClick={() => {
-                  setSelected(option)
-                  setIsOpen(!isOpen)
-                  clickEvent(id, option.value)
-                }}
+                aria-selected={option.value === selected.value}
+                onClick={() => clickEvent(option)}
               >
                 <div className='flex items-center pointer-events-none'>
                   <span className='font-normal ml-3 block truncate'>{option.value}</span>
                 </div>
-                <span className='absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none'>
-                  {option.value === selected.value && <CheckIcon />}
-                </span>
+
+                {option.value === selected.value && (
+                  <span className='absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none'>
+                    <CheckIcon />
+                  </span>
+                )}
               </li>
             ))}
           </ul>

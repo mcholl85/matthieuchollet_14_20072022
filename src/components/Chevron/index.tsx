@@ -1,11 +1,11 @@
-interface ChevronProps {
+interface ChevronProps extends React.HTMLAttributes<HTMLOrSVGElement> {
   direction: 'up' | 'down'
-  className: string
 }
 
 export default function Chevron({ direction, className }: ChevronProps) {
   return (
     <svg
+      data-testid={direction}
       className={className}
       fill='none'
       stroke='currentColor'

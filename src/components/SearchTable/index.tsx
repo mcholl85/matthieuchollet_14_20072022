@@ -27,17 +27,20 @@ export default function SearchTable() {
   )
 
   return (
-    <>
-      <label className='flex md:justify-end items-baseline'>
-        Search :
-        <input
-          className='appearance-none block bg-gray-200 border-gray-200 shadow-md
-             text-gray-700 border rounded mb-3 ml-3 leading-tight focus:outline-none focus:bg-white'
-          type='text'
-          value={inputSearchValue}
-          onChange={handleChange}
-        />
-      </label>
-    </>
+    <div className='ml-2 block relative'>
+      <span className='h-full absolute inset-y-0 left-0 flex items-center pl-2'>
+        <svg viewBox='0 0 24 24' className='h-5 w-5 fill-current text-white'>
+          <path d='M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z'></path>
+        </svg>
+      </span>
+      <input
+        placeholder='Search'
+        className='appearance-none rounded-md border border-b block pl-8 pr-6 py-2 w-full bg-gray-900 text-sm font-semibold placeholder-gray-500 focus:placeholder-white focus:text-white focus:font-semibold focus:border-gray-900 focus:ring-0'
+        type='text'
+        data-testid='search'
+        value={inputSearchValue}
+        onChange={handleChange}
+      />
+    </div>
   )
 }

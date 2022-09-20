@@ -15,22 +15,19 @@ export default function SelectTable() {
   }
 
   return (
-    <>
-      <label className=''>
-        Show
-        <select
-          className='appearance-none shadow-md bg-gray-200 border-gray-200 text-gray-700 text-sm border rounded mx-3 mb-3 leading-tight focus:outline-none focus:bg-white'
-          value={entries}
-          onChange={handleChange}
-        >
-          {ENTRIES_OPTIONS.map((option) => (
-            <option key={option.id} value={option.value}>
-              {option.value}
-            </option>
-          ))}
-        </select>
-        entries
-      </label>
-    </>
+    <div className='relative'>
+      <select
+        className='appearance-none h-full rounded-md border block w-full bg-gray-900 border-gray-900 text-white font-semibold py-2 px-4 pr-8 leading-tight focus:border-gray-400 focus:ring-0'
+        value={entries}
+        onChange={handleChange}
+        data-testid='selectTable'
+      >
+        {ENTRIES_OPTIONS.map((option) => (
+          <option key={option.id} value={option.value}>
+            {option.value}
+          </option>
+        ))}
+      </select>
+    </div>
   )
 }

@@ -6,6 +6,7 @@ export default function SelectIcon() {
       viewBox='0 0 20 20'
       fill='currentColor'
       aria-hidden='true'
+      data-testid='selectIcon'
     >
       <path
         fillRule='evenodd'

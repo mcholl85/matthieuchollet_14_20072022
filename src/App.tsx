@@ -7,16 +7,14 @@ import { FORM_DEFAULT_VALUES } from './utils/data'
 
 function App() {
   return (
-    <div>
-      <EmployeeProvider>
-        <FormProvider initialValues={FORM_DEFAULT_VALUES}>
-          <Routes>
-            <Route path='/' element={<CreateEmployee />} />
-            <Route path='/employee-list' element={<EmployeeList />} />
-          </Routes>
-        </FormProvider>
-      </EmployeeProvider>
-    </div>
+    <EmployeeProvider>
+      <FormProvider initialValues={FORM_DEFAULT_VALUES}>
+        <Routes>
+          <Route path='/' element={<CreateEmployee />} />
+          <Route path='/employee-list' element={<EmployeeList />} />
+        </Routes>
+      </FormProvider>
+    </EmployeeProvider>
   )
 }
 

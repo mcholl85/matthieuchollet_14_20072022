@@ -1,5 +1,21 @@
+import { EmployeeState } from '../../utils/context/employee'
+import * as reactRedux from 'react-redux'
+
 export const USE_MOCK_DATA = true
 
+export const mockStore = {
+    table: {
+      employees: [] as EmployeeState[],
+      filteredEmployees: [] as EmployeeState[],
+      params: { entries: 10, page: 1, search: '', sort: 'firstName', order: 'asc' },
+      count: 0,
+      totalCount: 0,
+      totalPage: 0,
+    }
+}
+
+export const useSelectorMock = reactRedux.useSelector as jest.Mock
+export const useDispatchMock = reactRedux.useDispatch as jest.Mock
 
 /*
   const [data, setData] = useState([] as any)
@@ -11038,3 +11054,26 @@ export const MOCK_EMPLOYEES = [
         'zipCode': '84703'
     }
 ]
+
+export const mockStoreWithEmployees = {
+    table: {
+        employees: MOCK_EMPLOYEES,
+        filteredEmployees: MOCK_EMPLOYEES.slice(0,10),
+        params: { entries: 10, page: 1, search: '', sort: 'firstName', order: 'asc' },
+        count: 10,
+        totalCount: 1000,
+        totalPage: 100,
+      }
+}
+
+export const mockFormSuccessValues = {
+    firstName: 'Matthieu',
+    lastName: 'Chollet',
+    startDate: '2020-09-18',
+    department: 'Sales',
+    dateOfBirth: '2000-09-18',
+    street: '8629 Saddle Dr',
+    city: 'Everett',
+    state: 'Alabama',
+    zipCode: '72000',
+}
